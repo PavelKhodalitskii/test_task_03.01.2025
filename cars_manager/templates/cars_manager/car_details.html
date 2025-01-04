@@ -1,4 +1,10 @@
 {% extends 'cars_manager/base.html' %}
+{% load root_comments %}
+{% load static %}
+
+{% block additional_css %}
+    <link type="text/css" href="{% static 'css/comments.css' %}" rel = "stylesheet">
+{% endblock %}
 
 {% block content %}
     <h1>{{ car.make }} {{ car.model }}</h1>
@@ -7,4 +13,6 @@
     <p>Обновлено: {{ car.updated_at }}</p>
     <h2>Описание</h2>
     <p>{{ car.description }}</p>
+    <h2>Комментарии</h2>
+    {% include 'cars_manager/includes/comments_list.html' with comments=car.comments.all|root_comments %}
 {% endblock %}

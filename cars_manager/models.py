@@ -52,10 +52,13 @@ class Comments(models.Model):
 
     content = models.TextField(max_length=4096, verbose_name="Содержание")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="D&T создания")
-    car = models.ForeignKey(Car, on_delete=models.CASCADE, verbose_name="Автомобиль")
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, verbose_name="Автомобиль", related_name="comments")
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=False, verbose_name="Автор")
     # Внешний ключ для создания ответов на комментарии
     parent = models.ForeignKey('self' , null=True , blank=True, on_delete=models.CASCADE , related_name='replies')
+
+    def __str__(self):
+        return f"{self.created_at.date()} {self.created_at.time()}, {self.author.first_name} {self.author.last_name}"
 
     class Meta:
         indexes = [

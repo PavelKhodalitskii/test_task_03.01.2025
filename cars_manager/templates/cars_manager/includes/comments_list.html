@@ -1,0 +1,28 @@
+<div class="list comments">
+    {% for comment in comments %}
+        <div class="comment" id="comment_{{comment.id}}">
+            {% if comment.parent %}
+                <span class="reply">Ответ: {{ comment.parent }}</span>
+            {% endif %}
+            <div>
+                <p>{{ comment.content }}</p>
+                <span>Автор: {{comment.author.first_name}} {{comment.author.last_name}}</span>
+                <button onclick="showReplies({{comment.id}})" class="button_as_span">{{comment.replies.all|length}} Ответов</button>
+            </div>
+            <div class="replies" id="{{comment.id}}_replies" style="display: none;">
+                {% include 'cars_manager/includes/comments_list.html' with comments=comment.replies.all %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    function showReplies(comment_id) {
+        let repliesDiv = document.getElementById(`${comment_id}_replies`);
+        if (repliesDiv.style.display == 'none') {
+            repliesDiv.style.display = 'block';
+        } else {
+            repliesDiv.style.display = 'none';
+        }
+    }
+</script>

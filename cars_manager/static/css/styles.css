@@ -1,4 +1,5 @@
 body {
+    /* background-color: #0d1117; */
     background-color: #ffffff;
     margin: 0;
 }
@@ -48,6 +49,14 @@ a {
     font-family: 'Geologica';
     font-weight: 200;
     font-size: 15pt;
+    color: black;
+    text-align: left;
+}
+
+span {
+    font-family: 'Geologica';
+    font-weight: 200;
+    font-size: 11pt;
     color: black;
     text-align: left;
 }
@@ -246,6 +255,19 @@ button:hover {
     width: 200px;
 }
 
+.button_as_span {
+    display: inline;
+    border-radius: 0;
+    background-color: transparent;
+    height: 25px;
+    width: 100px;
+}
+
+.button_as_span:hover {
+    background-color: transparent;
+    color: rgb(5, 22, 214);
+}
+
 .input_as_button:hover {
     background-color: #767676;
     color: white;
@@ -283,19 +305,6 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-}
-
-.research {
-    box-shadow:  6px 6px 10px 7px #cfcfcf;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
-    padding-left: 40px;
-    /* border-style: solid;
-    border-width: 0.5px;
-    border-color: #767676; */
-    border-radius: 40px;
-    width: 70%;
 }
 
 .list {
