@@ -31,9 +31,9 @@
                     <a href="{% url 'admin:index' %}">Админ панель</a>
                 {% endif %}
                 <p>Вы авторизованы как: <a>{{ user.username }}</a></p>            
-                <a href="#">Выйти</a>
+                <a href="{% url 'logout' %}">Выйти</a>
             {% else %}
-                <a href="#">Войти</a>
+                <a href="{% url 'login' %}">Войти</a>
             {% endif %}
         </div>
     </header>

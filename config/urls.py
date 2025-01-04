@@ -21,6 +21,7 @@ from django.urls import path, include, reverse
 urlpatterns = [
     #TODO: rewrite
     path('', lambda request: redirect(reverse('main_page')), name="root"),
+    path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
     path('cars/', include('cars_manager.urls'))
 ]
