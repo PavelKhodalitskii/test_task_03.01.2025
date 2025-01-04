@@ -1,7 +1,7 @@
 {% extends 'accounts/base.html' %}
 
 {% block content %}
-    <div class="login_container">
+    <div class="login container">
         <form method="post">
             <h2 class="head_form">Вход</h2>
             {{ form.as_p }}
@@ -9,7 +9,7 @@
             <p><input type="submit" value="Авторизация" class="submit_button"></p>
         </form>
         <p>
-            Нет аккаунта? <a href="#">Зарегистрируйтесь!</a>
+            Нет аккаунта? <a href="{% url 'registration' %}">Зарегистрируйтесь!</a>
         </p>
     </div>
 {% endblock %}
