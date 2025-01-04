@@ -1,0 +1,5 @@
+{% extends 'cars_manager/base.html' %}
+
+{% block content %}
+    {% include 'cars_manager/includes/cars_list.html' with cars=cars %}
+{% endblock %}

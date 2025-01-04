@@ -1,0 +1,9 @@
+<div class="list cars">
+    {% for car in cars %}
+        <a href="#" class="car">
+            <h3>{{ car.mark }} {{ car.model }}</h3>
+            <b>Владаец: {{ car.owner.first_name }} {{ car.owner.last_name}}</b>
+            <p>Добавлено: {{ car.created_at }}</p>
+        </a>
+    {% endfor %}
+</div>
