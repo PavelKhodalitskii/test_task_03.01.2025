@@ -6,9 +6,21 @@
             {% endif %}
             <div>
                 <p>{{ comment.content }}</p>
-                <span>Автор: {{comment.author.first_name}} {{comment.author.last_name}}</span>
+                <span>{{comment.author.first_name}} {{comment.author.last_name}}</span>
                 <button onclick="showReplies({{comment.id}})" class="button_as_span">{{comment.replies.all|length}} Ответов</button>
+                {% if user.is_authenticated %}
+                    <button onclick="showReplyForm({{comment.id}})" class="button_as_span">Ответить</button>
+                    {% if comment.author.id == user.id %}
+                        <a href="{% url 'delete_comment' comment.id %}">Удалить</a>
+                    {% endif %}
+                {% endif %}
             </div>
+            
+            <div id="{{comment.id}}_reply_container" style="display: none;">
+                <!-- <button class="button_as_span">Отмена</button> -->
+                {% include 'cars_manager/includes/comment_form.html' with form=create_comment_form reply_to=comment.id %}
+            </div>
+
             <div class="replies" id="{{comment.id}}_replies" style="display: none;">
                 {% include 'cars_manager/includes/comments_list.html' with comments=comment.replies.all %}
             </div>
@@ -17,6 +29,15 @@
 </div>
 
 <script>
+    function showReplyForm(comment_id) {
+        let replyOverlay = document.getElementById(`${comment_id}_reply_container`);
+        if (replyOverlay.style.display == 'none') {
+            replyOverlay.style.display = 'block';
+        } else {
+            replyOverlay.style.display = 'none';
+        }
+    }
+
     function showReplies(comment_id) {
         let repliesDiv = document.getElementById(`${comment_id}_replies`);
         if (repliesDiv.style.display == 'none') {

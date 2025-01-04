@@ -7,6 +7,14 @@
     width: 70%;
 }
 
+.comment a {
+    font-size: 11pt;
+}
+
+.comment a:hover {
+    color: red;
+}
+
 .comments { 
     gap: 20px;
 }

@@ -13,6 +13,15 @@
     <p>Обновлено: {{ car.updated_at }}</p>
     <h2>Описание</h2>
     <p>{{ car.description }}</p>
+
+    {% if user.id == car.owner.id %}
+        <button>Изменить</button>
+        <button class="delete_button">Удалить</button>
+    {% endif %}
+
+    <hr>
+    
     <h2>Комментарии</h2>
-    {% include 'cars_manager/includes/comments_list.html' with comments=car.comments.all|root_comments %}
+    {% include 'cars_manager/includes/comment_form.html' with form=create_comment_form %}
+    {% include 'cars_manager/includes/comments_list.html' with comments=car.comments.all|root_comments create_comment_form=create_comment_form%}
 {% endblock %}

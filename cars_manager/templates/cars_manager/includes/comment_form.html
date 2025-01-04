@@ -1,0 +1,9 @@
+<h3>Добавить комментарий</h3>
+<form action="{% url "post_comment" car.id %}" method="post">
+    {{ form.content }}
+    {% if reply_to %}
+        <input type="hidden" value="{{ reply_to }}" name="parent">
+    {% endif %}
+    {% csrf_token %}
+    <p><input class="input_as_button" type="submit" value="Добавить"></p>
+</form>
