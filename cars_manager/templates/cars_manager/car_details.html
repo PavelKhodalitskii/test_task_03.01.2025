@@ -1,0 +1,10 @@
+{% extends 'cars_manager/base.html' %}
+
+{% block content %}
+    <h1>{{ car.make }} {{ car.model }}</h1>
+    <b>Владаец: {{ car.owner.first_name }} {{ car.owner.last_name}}</b>
+    <p>Добавлено: {{ car.created_at }}</p>
+    <p>Обновлено: {{ car.updated_at }}</p>
+    <h2>Описание</h2>
+    <p>{{ car.description }}</p>
+{% endblock %}

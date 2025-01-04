@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator
+from django.urls import reverse
 
 
 class Brand(models.Model):
@@ -9,6 +10,9 @@ class Brand(models.Model):
     '''
 
     name = models.CharField(max_length=128, null=False, blank=False, verbose_name="Название")
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = "Марка"
@@ -26,6 +30,12 @@ class Car(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="D&T создания")
     uploaded_at = models.DateTimeField(auto_now=True, verbose_name="D&T обновления")
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=False, verbose_name="Владелец")
+
+    def __str__(self):
+        return " ".join([str(self.make), self.model, str(self.year)])
+    
+    def get_absolute_url(self):
+        return reverse('car_details', kwargs={'car_id': self.id})
 
     class Meta:
         indexes = [

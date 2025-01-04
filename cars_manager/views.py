@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 
 from .models import Car
 
@@ -10,7 +10,11 @@ class CarsMainPage(ListView):
     context_object_name = 'cars'
     extra_context = {'title': 'Авто-мир'}
 
+class CarsDetailsView(DetailView):
+    template_name = "cars_manager/car_details.html"
+    model = Car
+    context_object_name = 'car'
+    pk_url_kwarg = 'car_id'
 
-# Create your views here.
 class TestView(TemplateView):
     template_name = "cars_manager/base.html"
