@@ -1,5 +1,8 @@
 {% extends 'cars_manager/base.html' %}
 
 {% block content %}
+    {% if user.is_authenticated %}
+        <a href="{% url 'car_create' %}" class="a_as_button">Добавить авто</a>
+    {% endif %}
     {% include 'cars_manager/includes/cars_list.html' with cars=cars %}
 {% endblock %}

@@ -15,7 +15,7 @@
     <p>{{ car.description }}</p>
 
     {% if user.id == car.owner.id %}
-        <button>Изменить</button>
+        <a href="{% url 'car_update' car.id %}" class="a_as_button">Изменить</a>
         <button class="delete_button">Удалить</button>
     {% endif %}
 
