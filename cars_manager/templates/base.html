@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" href="{% static 'css/styles.css' %}" rel = "stylesheet">
+
+    <!-- Получение шрифтов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="{% static 'images/utils/sitelogo.png' %}" type="image/x-icon"/>
+
+    <title>{{ title }}</title>
+</head>
+<body>
+    <header class="header">
+        <div class="navigation_bar">
+            <div class="naviagation_list">
+                <a href="#" class="header_item">
+                    <p class="header_link">Главная</p>
+                </a>
+            </div>
+        </div>
+        <div class="user_info">
+            {% if request.user.is_authenticated %}
+                {% if request.user.is_superuser %}
+                    <a href="{% url 'admin:index' %}">Админ панель</a>
+                {% endif %}
+                <p>Вы авторизованы как: <a>{{ user.username }}</a></p>            
+                <a href="#">Выйти</a>
+            {% else %}
+                <a href="#">Войти</a>
+            {% endif %}
+        </div>
+    </header>
+    <div class="underline"></div>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
