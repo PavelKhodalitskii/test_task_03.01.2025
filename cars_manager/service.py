@@ -19,19 +19,17 @@ class CommentsController:
 
 
     @staticmethod
-    def create_comment(content: str, author_id: int, car_id: int, reply_to_id = None | int) -> Comments:
+    def create_comment(content: str, author_id: int, car: Car, reply_to: Comments) -> Comments:
         '''
         Используйте эту функцию, что бы создать комментарий
         '''
 
-        author = UserController.get_user_by_pk(pk=author_id) 
-        car = CarController.get_car(id=car_id)
-        parent = CommentsController.get_comment(id=reply_to_id)
+        author = UserController.get_user_by_pk(pk=author_id)     
 
         if not car or not author:
             return None
         
-        new_comment = Comments(content=content, author=author, car=car, parent=parent)
+        new_comment = Comments(content=content, author=author, car=car, parent=reply_to)
         new_comment.save()
 
         return new_comment
