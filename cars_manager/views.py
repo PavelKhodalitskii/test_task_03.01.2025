@@ -81,7 +81,7 @@ class CarsDeleteView(DeleteView):
     template_name = "cars_manager/base_delete.html"
     pk_url_kwarg = 'car_id'
 
-@permission_required('cars_manager.delete_comments')
+@permission_required('cars_manager.delete_comment')
 def delete_comment(request, comment_id):
     comment = CommentsController.get_comment(id=comment_id)
     if comment:

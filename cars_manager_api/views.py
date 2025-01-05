@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.mixins import CreateModelMixin
 from rest_framework.exceptions import NotAuthenticated
 
-from cars_manager.models import Car, Comments
+from cars_manager.models import Car, Comment
 from .serializers import CarBaseSerializer, CarDetailSerializer, CommentsBaseSerializer
 
 
@@ -40,7 +40,7 @@ class CommentDetailCreateViewApiView(generics.ListAPIView, CreateModelMixin):
     def get_queryset(self):
         # Возвращает комментарии по id автомобиля
         car_id = self.kwargs.get('id')
-        return Comments.objects.filter(car__id=car_id)
+        return Comment.objects.filter(car__id=car_id)
     
     # Реализация post метода для CreateModelMixin
     def post(self, request, *args, **kwargs):

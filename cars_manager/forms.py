@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Car, Comments
+from .models import Car, Comment
 
 
 class CarForm(forms.ModelForm):
@@ -10,7 +10,7 @@ class CarForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
     class Meta:
-        model = Comments
+        model = Comment
         fields = ['content', 'parent']
 
         widgets = {

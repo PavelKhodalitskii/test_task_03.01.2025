@@ -9,7 +9,9 @@
                 <span>{{comment.author.first_name}} {{comment.author.last_name}}</span>
                 <button onclick="showReplies({{comment.id}})" class="button_as_span">{{comment.replies.all|length}} Ответов</button>
                 {% if user.is_authenticated %}
-                    <button onclick="showReplyForm({{comment.id}})" class="button_as_span">Ответить</button>
+                    {% if perms.cars_manager.add_comments %}
+                        <button onclick="showReplyForm({{comment.id}})" class="button_as_span">Ответить</button>
+                    {% endif %}
                     {% if comment.author.id == user.id %}
                         <a href="{% url 'delete_comment' comment.id %}">Удалить</a>
                     {% endif %}
@@ -18,7 +20,9 @@
             
             <div id="{{comment.id}}_reply_container" style="display: none;">
                 <!-- <button class="button_as_span">Отмена</button> -->
-                {% include 'cars_manager/includes/comment_form.html' with form=create_comment_form reply_to=comment.id %}
+                {% if perms.cars_manager.add_comments %}
+                    {% include 'cars_manager/includes/comment_form.html' with form=create_comment_form reply_to=comment.id %}
+                {% endif %}
             </div>
 
             <div class="replies" id="{{comment.id}}_replies" style="display: none;">

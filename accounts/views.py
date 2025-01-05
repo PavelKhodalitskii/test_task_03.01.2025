@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from .forms import UserRegistrationForm
 from .service import UserController
 
+
 class LoginUser(auth_views.LoginView):
     form_class = AuthenticationForm
     template_name = 'accounts/login.html'

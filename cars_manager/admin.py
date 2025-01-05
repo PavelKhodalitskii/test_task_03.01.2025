@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import Brand, Car, Comments
+from .models import Brand, Car, Comment
 
-# Register your models here.
+
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Brand._meta.fields]
@@ -14,8 +14,8 @@ class Car(admin.ModelAdmin):
     search_fields = ("mark", "model")
     list_filter = ("year", "created_at", "updated_at")
 
-@admin.register(Comments)
-class Comments(admin.ModelAdmin):
-    list_display = [field.name for field in Comments._meta.fields]
+@admin.register(Comment)
+class Comment(admin.ModelAdmin):
+    list_display = [field.name for field in Comment._meta.fields]
     search_fields = ("content", "model")
     list_filter = ("created_at",)
