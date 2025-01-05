@@ -23,5 +23,6 @@ urlpatterns = [
     path('', lambda request: redirect('main_page'), name="root"),
     path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
-    path('cars/', include('cars_manager.urls'))
+    path('cars/', include('cars_manager.urls')),
+    path('api/', include('cars_manager_api.urls')),
 ]
