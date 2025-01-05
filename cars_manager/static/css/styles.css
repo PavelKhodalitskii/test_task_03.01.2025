@@ -61,6 +61,11 @@ span {
     text-align: left;
 }
 
+.link {
+    text-decoration: underline;
+    color: #45f200;
+}
+
 .header {
     height: 75px;
     display: flex;
@@ -158,16 +163,6 @@ input {
     padding: 0;
 }
 
-.submit_button {
-    border-radius: 10px;
-    border-style: none;
-    text-align: center;
-    /* border: 1px solid rgb(107, 107, 107); */
-    background-color: #29eaa0;
-    width: 200px;
-    height: 40px;
-}
-
 .cars {
     display: flex;
     flex-direction: column;
@@ -215,6 +210,19 @@ button {
     font-size: 12pt;
     height: 40px;
     width: 200px;
+}
+
+.submit_button {
+    border-radius: 10px;
+    border-style: none;
+    text-align: center;
+    background-color: #29eaa0;
+    width: 200px;
+    height: 40px;
+}
+
+.submit_button:hover {
+    background-color: #29eaa035;
 }
 
 button:hover {
@@ -299,7 +307,6 @@ button:hover {
     color: white;
 }
 
-/* ------------------ */
 
 .items_list {
     display: flex;
@@ -310,5 +317,11 @@ button:hover {
 .list {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+}
+
+.horizontal_list {
+    display: flex;
+    flex-direction: row;
     gap: 10px;
 }

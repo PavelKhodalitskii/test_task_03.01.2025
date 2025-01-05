@@ -12,7 +12,7 @@ class BrandAdmin(admin.ModelAdmin):
 class Car(admin.ModelAdmin):
     list_display = [field.name for field in Car._meta.fields]
     search_fields = ("mark", "model")
-    list_filter = ("year", "created_at", "uploaded_at")
+    list_filter = ("year", "created_at", "updated_at")
 
 @admin.register(Comments)
 class Comments(admin.ModelAdmin):

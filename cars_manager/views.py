@@ -3,16 +3,15 @@ from django.urls import reverse_lazy
 from django.views.generic import (ListView,
                                   CreateView,
                                   UpdateView, 
-                                  DetailView, 
-                                  FormView, 
+                                  DetailView,                                   
                                   DeleteView)
 
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.decorators import permission_required
 
 from .forms import CommentForm, CarForm
-from .models import Car, Comments
-from .service import CarController, CommentsController
+from .models import Car
+from .service import CommentsController
 
 
 class CarsMainPage(ListView):
@@ -21,10 +20,12 @@ class CarsMainPage(ListView):
     context_object_name = 'cars'
     extra_context = {'title': 'Авто-мир'}
     
-class CarsCreateFormView(CreateView):
+class CarsCreateFormView(PermissionRequiredMixin, CreateView):
     template_name = 'cars_manager/base_form.html'
     form_class = CarForm
     extra_context = {'title': 'Поделитесь мнением об автомобиле!', 'action': 'Создать'}
+    # Только пользователи, у котрых есть разрешение на добавление автомобилей могут их добавлять
+    permission_required = 'cars_manager.add_car'
 
     def form_valid(self, form):
         new_car = form.save()
@@ -32,10 +33,14 @@ class CarsCreateFormView(CreateView):
         new_car.save()
         return super().form_valid(form)
 
-class CarsUpdateFormView(UpdateView):
+class CarsUpdateFormView(PermissionRequiredMixin, UpdateView):
     template_name = 'cars_manager/base_form.html'
     form_class = CarForm
+    model = Car
+    pk_url_kwarg = 'car_id'
     extra_context = {'title': 'Поделитесь мнением об автомобиле!', 'action': 'Обновить'}
+    permission_required = 'cars_manager.change_car'
+    
 
 class CarsDetailsView(DetailView):
     template_name = "cars_manager/car_details.html"
@@ -45,11 +50,13 @@ class CarsDetailsView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['title'] = f"{context['car'].make} {context['car'].model}"
         context['create_comment_form'] = CommentForm()
         return context
     
-class CommentCreateView(LoginRequiredMixin, CreateView):
+class CommentCreateView(PermissionRequiredMixin, CreateView):
     form_class = CommentForm
+    permission_required = 'cars_manager.add_comments'
 
     def get_success_url(self):
         return self.request.META.get('HTTP_REFERER', '/')
@@ -60,10 +67,10 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         content = form.cleaned_data.get('content')
         parent = form.cleaned_data.get('parent')
 
-        CommentsController.create_comment(content=content,
-                                            author_id=self.request.user.id,
-                                            car=car,
-                                            reply_to=parent)
+        CommentsController.create_comment(content=content, 
+                                          author_id=self.request.user.id,
+                                          car=car,
+                                          reply_to=parent)
         
         return redirect(self.get_success_url())
 
@@ -73,10 +80,12 @@ class CarsDeleteView(DeleteView):
     template_name = "cars_manager/base_delete.html"
     pk_url_kwarg = 'car_id'
 
-@login_required
+@permission_required('cars_manager.delete_comments')
 def delete_comment(request, comment_id):
     comment = CommentsController.get_comment(id=comment_id)
     if comment:
-        CommentsController.delete_comment(comment_id=comment_id)
+        # Пользователь может удалять только свои комментарии
+        if comment.author.id == request.user.id:
+            CommentsController.delete_comment(comment_id=comment_id)
         return redirect(reverse_lazy('car_details', kwargs={"car_id": comment.car.id}))
     return redirect('root')

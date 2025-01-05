@@ -28,7 +28,7 @@ class Car(models.Model):
     year = models.PositiveIntegerField(validators=[MaxValueValidator(3000)],null=False, blank=False, verbose_name="Год")
     description = models.TextField(null=True, blank=True, verbose_name="Описание")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="D&T создания")
-    uploaded_at = models.DateTimeField(auto_now=True, verbose_name="D&T обновления")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="D&T обновления")
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=False, verbose_name="Владелец")
 
     def __str__(self):

@@ -31,12 +31,12 @@
         <div class="user_info">
             {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}
-                    <a href="{% url 'admin:index' %}">Админ панель</a>
+                    <a class="link" href="{% url 'admin:index' %}">Админ панель</a>
                 {% endif %}
                 <p>Вы авторизованы как: <a>{{ user.username }}</a></p>            
-                <a href="{% url 'logout' %}">Выйти</a>
+                <a class="link" href="{% url 'logout' %}">Выйти</a>
             {% else %}
-                <a href="{% url 'login' %}">Войти</a>
+                <a class="link" href="{% url 'login' %}">Войти</a>
             {% endif %}
         </div>
     </header>

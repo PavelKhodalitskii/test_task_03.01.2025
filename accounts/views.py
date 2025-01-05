@@ -6,6 +6,7 @@ from django.views.generic import FormView
 from django.urls import reverse_lazy
 
 from .forms import UserRegistrationForm
+from .service import UserController
 
 class LoginUser(auth_views.LoginView):
     form_class = AuthenticationForm
@@ -19,9 +20,12 @@ class RegisterUser(FormView):
     template_name = 'accounts/register.html'
 
     def form_valid(self, form):
-        new_user = form.save()
+        new_user = form.save(commit=False)
+        new_user.set_password(form.cleaned_data['password'])
+        new_user.save()
+        UserController.set_group(new_user, 'default_user')
         login(request=self.request, user=new_user)
-        return super().form_valid(form)
+        return redirect(self.get_success_url())
     
     def get_success_url(self):
         return reverse_lazy('root')

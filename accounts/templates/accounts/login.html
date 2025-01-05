@@ -9,7 +9,10 @@
             <p><input type="submit" value="Авторизация" class="submit_button"></p>
         </form>
         <p>
-            Нет аккаунта? <a href="{% url 'registration' %}">Зарегистрируйтесь!</a>
+            Нет аккаунта? <a class="link" href="{% url 'registration' %}">Зарегистрируйтесь!</a>
+        </p>
+        <p>
+            <a class="link" href="{% url 'root' %}">Главная</a>
         </p>
     </div>
 {% endblock %}
