@@ -24,7 +24,7 @@
     <hr>
     
     <h2>Комментарии</h2>
-    {% if perms.cars_manager.add_comments %}
+    {% if perms.cars_manager.add_comment %}
         {% include 'cars_manager/includes/comment_form.html' with form=create_comment_form %}
     {% endif %}
     {% include 'cars_manager/includes/comments_list.html' with comments=car.comments.all|root_comments create_comment_form=create_comment_form%}

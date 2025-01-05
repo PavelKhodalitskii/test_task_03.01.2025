@@ -9,7 +9,7 @@
                 <span>{{comment.author.first_name}} {{comment.author.last_name}}</span>
                 <button onclick="showReplies({{comment.id}})" class="button_as_span">{{comment.replies.all|length}} Ответов</button>
                 {% if user.is_authenticated %}
-                    {% if perms.cars_manager.add_comments %}
+                    {% if perms.cars_manager.add_comment %}
                         <button onclick="showReplyForm({{comment.id}})" class="button_as_span">Ответить</button>
                     {% endif %}
                     {% if comment.author.id == user.id %}
@@ -20,7 +20,7 @@
             
             <div id="{{comment.id}}_reply_container" style="display: none;">
                 <!-- <button class="button_as_span">Отмена</button> -->
-                {% if perms.cars_manager.add_comments %}
+                {% if perms.cars_manager.add_comment %}
                     {% include 'cars_manager/includes/comment_form.html' with form=create_comment_form reply_to=comment.id %}
                 {% endif %}
             </div>

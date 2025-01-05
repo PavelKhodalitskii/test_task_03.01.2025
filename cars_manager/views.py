@@ -56,7 +56,7 @@ class CarsDetailsView(DetailView):
     
 class CommentCreateView(PermissionRequiredMixin, CreateView):
     form_class = CommentForm
-    permission_required = 'cars_manager.add_comments'
+    permission_required = 'cars_manager.add_comment'
 
     def get_success_url(self):
         return self.request.META.get('HTTP_REFERER', '/')
