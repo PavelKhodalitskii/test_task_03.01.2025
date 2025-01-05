@@ -18,11 +18,16 @@ from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import path, include, reverse
 
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
 urlpatterns = [
-    #TODO: rewrite
     path('', lambda request: redirect('main_page'), name="root"),
     path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
     path('cars/', include('cars_manager.urls')),
     path('api/', include('cars_manager_api.urls')),
+
+    # drf-spectacular
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/doc/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui")
 ]
