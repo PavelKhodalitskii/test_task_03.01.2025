@@ -1,0 +1,31 @@
+{% extends 'cars_manager/base.html' %}
+{% load root_comments %}
+{% load static %}
+
+{% block additional_css %}
+    <link type="text/css" href="{% static 'css/comments.css' %}" rel = "stylesheet">
+{% endblock %}
+
+{% block content %}
+    <h1>{{ car.make }} {{ car.model }}</h1>
+    <b>Владаец: {{ car.owner.first_name }} {{ car.owner.last_name}}</b>
+    <p>Добавлено: {{ car.created_at }}</p>
+    <p>Обновлено: {{ car.updated_at }}</p>
+    <h2>Описание</h2>
+    <p>{{ car.description }}</p>
+
+    {% if user.id == car.owner.id and perms.cars_manager.change_car %}
+        <div class="horizontal_list">
+            <a href="{% url 'car_update' car.id %}" class="a_as_button">Изменить</a>
+            <a href="{% url 'car_delete' car.id %}" class="a_as_button delete_button">Удалить</a>
+        </div>
+    {% endif %}
+
+    <hr>
+    
+    <h2>Комментарии</h2>
+    {% if perms.cars_manager.add_comments %}
+        {% include 'cars_manager/includes/comment_form.html' with form=create_comment_form %}
+    {% endif %}
+    {% include 'cars_manager/includes/comments_list.html' with comments=car.comments.all|root_comments create_comment_form=create_comment_form%}
+{% endblock %}
