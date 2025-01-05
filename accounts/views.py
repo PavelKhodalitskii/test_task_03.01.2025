@@ -23,6 +23,7 @@ class RegisterUser(FormView):
         new_user = form.save(commit=False)
         new_user.set_password(form.cleaned_data['password'])
         new_user.save()
+        # Устновим пользователю стандартную группу разрешений
         UserController.set_group(new_user, 'default_user')
         login(request=self.request, user=new_user)
         return redirect(self.get_success_url())

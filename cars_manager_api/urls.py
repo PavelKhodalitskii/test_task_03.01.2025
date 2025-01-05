@@ -1,7 +1,9 @@
 from django.urls import path
-from .views import CarApiView, CarsListApiView
+from .views import CarDetailUpdateDeleteApiView, CarsListCreateApiView, CommentDetailCreateViewApiView
 
 
 urlpatterns = [
-    path('cars/', CarsListApiView.as_view(), name="api_cars_list"),
+    path('cars/', CarsListCreateApiView.as_view()),
+    path('cars/<int:id>', CarDetailUpdateDeleteApiView.as_view()),
+    path('cars/<int:id>/comments/', CommentDetailCreateViewApiView.as_view())
 ]

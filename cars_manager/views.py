@@ -67,6 +67,7 @@ class CommentCreateView(PermissionRequiredMixin, CreateView):
         content = form.cleaned_data.get('content')
         parent = form.cleaned_data.get('parent')
 
+        # Создание комментария
         CommentsController.create_comment(content=content, 
                                           author_id=self.request.user.id,
                                           car=car,

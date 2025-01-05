@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
     'drf_spectacular',
 
     'cars_manager.apps.CarsManagerConfig',
@@ -144,8 +145,8 @@ REST_FRAMEWORK = {
 SPECTACULAR_SETTINGS = {
     "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
     "REDOC_DIST": "SIDECAR",
-    "TITLE": 'Система управление автомобилями',
-    "DESCRIPTION": "Тестовое задание для компании IT-Solutions",
+    "TITLE": 'Система управления автомобилями',
+    "DESCRIPTION": "Тестовое задание для компании IT-Solution",
     "VERSION": "2.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     "SCHEMA_PATH_PREFIX": r"/api/cars/",

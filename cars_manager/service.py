@@ -1,23 +1,13 @@
 from accounts.service import UserController
 from .models import Comments, Car
 
+# Тут я расположил классы, призванные инкапсулировать логику, связанную с моделями
+# В этот раз, логики вышло не очень много, но обычно пригождается
+
 class CarController:
-    @staticmethod
-    def get_car(**kwargs) -> Car:
-        cars = Car.objects.filter(**kwargs)
-        if cars.exists():
-            return cars.first()
-        return None
+    pass
 
 class CommentsController:
-    @staticmethod
-    def get_comment(**kwargs) -> Comments:
-        comments = Comments.objects.filter(**kwargs)
-        if comments.exists():
-            return comments.first()
-        return None
-
-
     @staticmethod
     def create_comment(content: str, author_id: int, car: Car, reply_to: Comments) -> Comments:
         '''
