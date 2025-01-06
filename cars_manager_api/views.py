@@ -2,16 +2,18 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.mixins import CreateModelMixin
 from rest_framework.exceptions import NotAuthenticated
 
 from cars_manager.models import Car, Comment
 from .serializers import CarBaseSerializer, CarDetailSerializer, CommentsBaseSerializer
+from .permissions import IsOwnerOrReadOnly
 
 
 class CarsListCreateApiView(generics.ListCreateAPIView):
     queryset = Car.objects.all()
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
@@ -25,7 +27,7 @@ class CarsListCreateApiView(generics.ListCreateAPIView):
 
 class CarDetailUpdateDeleteApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Car.objects.all()
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     lookup_field = 'id'
     
     def get_serializer_class(self):
