@@ -74,4 +74,12 @@ http://['host']:['port']/api/doc (http://0.0.0.0:8000/api/doc)
 
 drf-specatcular предоставляет интерфейс для тестирования взаимодействия с Api. Там удобно описаны форматы запросов и ответов.
 
-![Страница документации API](additional/images/drs_spec+swagui.png)
+**Если нужна дока, то [API Документация](additional/docs/api.md)**
+
+Страница документации API:
+
+![Страница документации API](additional/images/drf_spec+swagui.png)
+
+Отправка POST-запроса
+
+![Страница документации API](additional/images/drf_spec_post_examp.png)
