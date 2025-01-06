@@ -1,0 +1,9 @@
+{% extends 'cars_manager/base.html' %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}          
+        <p>Вы уверены что хотите удалить: "{{ object }}"?</p>
+        <p><input class="delete_button" type="submit" value="Удалить"></p>
+    </form>
+{% endblock %}

@@ -1,0 +1,24 @@
+version: "3"
+
+services: 
+  cars_manager_backend:
+    restart: always
+    build:
+      .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/cars_manager
+    depends_on:
+      - cars_manager_database
+
+  cars_manager_database:
+    image: postgres:14
+    env_file:
+      - .env
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    volumes:
+     - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql

@@ -1,0 +1,62 @@
+.content {
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: white;
+    border: 1px solid rgb(107, 107, 107);
+    padding: 20px;
+}
+
+.login {
+    min-width: 350px;
+    width: 30%;
+
+    min-height: 450px;
+    height: 50%;
+}
+
+.register {
+    min-width: 350px;
+    width: 30%;
+
+    /* min-height: 900px;
+    height: 90%; */
+}
+
+input, label, .helptext {
+    display:block;
+}
+
+.container input {
+    padding-left: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 20px;
+    border: 1px solid rgb(107, 107, 107);
+    width: 100%;
+    height: 50px;
+}
+
+.container p {
+    margin: 10px;
+    width: 90%;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
