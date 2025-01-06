@@ -2,7 +2,7 @@
 
 {% block content %}
     {% if perms.cars_manager.add_car %}
-        <a href="{% url 'car_create' %}" class="a_as_button">Добавить авто</a>
+        <a id="car_create_link" href="{% url 'car_create' %}" class="a_as_button">Добавить авто</a>
     {% endif %}
     {% include 'cars_manager/includes/cars_list.html' with cars=cars %}
 {% endblock %}

@@ -1,25 +1,23 @@
 from accounts.service import UserController
-from .models import Comments, Car
+from .models import Comment, Car
+
+# Тут я расположил классы, призванные инкапсулировать логику, связанную с моделями
+# В этот раз, логики вышло не очень много, но обычно пригождается
 
 class CarController:
-    @staticmethod
-    def get_car(**kwargs) -> Car:
-        cars = Car.objects.filter(**kwargs)
-        if cars.exists():
-            return cars.first()
-        return None
+    pass
 
 class CommentsController:
     @staticmethod
-    def get_comment(**kwargs) -> Comments:
-        comments = Comments.objects.filter(**kwargs)
+    def get_comment(**kwargs) -> Comment:
+        comments = Comment.objects.filter(**kwargs)
         if comments.exists():
             return comments.first()
         return None
 
 
     @staticmethod
-    def create_comment(content: str, author_id: int, car: Car, reply_to: Comments) -> Comments:
+    def create_comment(content: str, author_id: int, car: Car, reply_to: Comment) -> Comment:
         '''
         Используйте эту функцию, что бы создать комментарий
         '''
@@ -29,7 +27,7 @@ class CommentsController:
         if not car or not author:
             return None
         
-        new_comment = Comments(content=content, author=author, car=car, parent=reply_to)
+        new_comment = Comment(content=content, author=author, car=car, parent=reply_to)
         new_comment.save()
 
         return new_comment

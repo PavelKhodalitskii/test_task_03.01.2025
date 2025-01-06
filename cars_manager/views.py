@@ -56,7 +56,7 @@ class CarsDetailsView(DetailView):
     
 class CommentCreateView(PermissionRequiredMixin, CreateView):
     form_class = CommentForm
-    permission_required = 'cars_manager.add_comments'
+    permission_required = 'cars_manager.add_comment'
 
     def get_success_url(self):
         return self.request.META.get('HTTP_REFERER', '/')
@@ -67,6 +67,7 @@ class CommentCreateView(PermissionRequiredMixin, CreateView):
         content = form.cleaned_data.get('content')
         parent = form.cleaned_data.get('parent')
 
+        # Создание комментария
         CommentsController.create_comment(content=content, 
                                           author_id=self.request.user.id,
                                           car=car,
@@ -80,7 +81,7 @@ class CarsDeleteView(DeleteView):
     template_name = "cars_manager/base_delete.html"
     pk_url_kwarg = 'car_id'
 
-@permission_required('cars_manager.delete_comments')
+@permission_required('cars_manager.delete_comment')
 def delete_comment(request, comment_id):
     comment = CommentsController.get_comment(id=comment_id)
     if comment:
