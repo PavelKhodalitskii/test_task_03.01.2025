@@ -30,6 +30,12 @@ POSTGRES_PASSWORD = "db_admin_pass"
 ```
 (Мне понятно, что в репозиториях ключи и пароли (и дампы бд) оставлять нельзя, в контексте этого задания это оправдано)
 
+**Данные для аутнетификации**
+
+Администратор: username: admin, password: admin
+Простой пользователь: username: default, password: default
+
+
 Для запуска проект понадобиться Docker.
 Приведеные ниже команды актуальны для Unix систем.
 
@@ -74,4 +80,12 @@ http://['host']:['port']/api/doc (http://0.0.0.0:8000/api/doc)
 
 drf-specatcular предоставляет интерфейс для тестирования взаимодействия с Api. Там удобно описаны форматы запросов и ответов.
 
-![Страница документации API](additional/images/drs_spec+swagui.png)
+**Если нужна дока, то [API Документация](additional/docs/api.md)**
+
+Страница документации API:
+
+![Страница документации API](additional/images/drf_spec+swagui.png)
+
+Отправка POST-запроса
+
+![Страница документации API](additional/images/drf_spec_post_examp.png)
