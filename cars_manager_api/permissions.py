@@ -3,6 +3,9 @@ from django.db.models import ForeignKey
 from django.contrib.auth.models import User
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
+    '''
+    Разрешение на POST, PUT, PATCH, DELETE запросы для владельца object
+    '''
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
             return True
