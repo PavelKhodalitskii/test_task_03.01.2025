@@ -32,8 +32,14 @@ POSTGRES_PASSWORD = "db_admin_pass"
 
 **Данные для аутнетификации**
 
-Администратор: username: admin, password: admin
-Простой пользователь: username: default, password: default
+Администратор: 
+```
+username: admin, password: admin
+```
+Простой пользователь: 
+```
+username: default, password: default
+```
 
 
 Для запуска проект понадобиться Docker.
