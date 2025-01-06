@@ -23,6 +23,9 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 urlpatterns = [
     path('', lambda request: redirect('main_page'), name="root"),
     path('accounts/', include('accounts.urls')),
+    # Session-based auth urls
+    path('api/accounts/', include('rest_framework.urls')),
+
     path('admin/', admin.site.urls),
     path('cars/', include('cars_manager.urls')),
     path('api/', include('cars_manager_api.urls')),
